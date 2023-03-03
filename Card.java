@@ -18,6 +18,7 @@ public class Card implements Comparable<Card> {
 
     @Override
     public int compareTo(Card o) {
-        return 0;
+        String temp = new String(valueLookUp);
+        return temp.indexOf(o.value) - temp.indexOf(this.value);
     }
 }
