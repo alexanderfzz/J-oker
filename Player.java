@@ -8,7 +8,7 @@ public class Player {
         this. capital = capital;
     }
 
-    public void withdrawCAptial(int amount) {
+    public void withdrawCaptial(int amount) {
         this.capital -= amount;
     }
     public void depositCapital(int amount) {
