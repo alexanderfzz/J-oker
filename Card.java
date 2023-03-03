@@ -4,16 +4,16 @@ public class Card implements Comparable<Card> {
         DIAMOND,
         SPADE,
         CLUB
-    };
-    char[] valueLookUp = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
+    }
+    public static char[] valueLookUp = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
 
 
     public Suit suit;
     public char value;
 
-    public Card(String suit, char value) {
+    public Card(Suit suit, char value) {
         this.value = value;
-        this.suit = Suit.valueOf(suit);
+        this.suit = suit;
     }
 
     @Override

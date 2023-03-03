@@ -3,10 +3,13 @@ import java.util.ArrayList;
 public class Players {
     public ArrayList<Player> players;
     public int pointer;
-    public Players(){}
+    public Players(){
+        this.players = new ArrayList<>();
+    }
 
-    public Player next(){
+    public Player roller(){
+        Player roller = players.get(pointer % players.size());
         pointer++;
-        return players.get(pointer % players.size());
+        return roller;
     }
 }
