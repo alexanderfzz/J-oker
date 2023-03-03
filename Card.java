@@ -1,24 +1,53 @@
-public class Card implements Comparable<Card> {
-    enum Suit {
-        HEART,
-        DIAMOND,
-        SPADE,
-        CLUB
-    }
-    public static char[] valueLookUp = {'1', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K'};
+import java.util.HashMap;
+import java.util.Map;
 
+public class Card implements Comparable<Card> {
+    enum Color{
+        RED,
+        BLACK,
+    }
+    enum Suit {
+        HEART(Color.RED),
+        DIAMOND(Color.RED),
+        SPADE(Color.BLACK),
+        CLUB(Color.BLACK);
+        public final Color c;
+        private Suit(Color c){
+            this.c = c;
+        }
+    }
+
+    enum Value {
+        TWO(0),
+        THREE(1),
+        FOUR(2),
+        FIVE(3),
+        SIX(4),
+        SEVEN(5),
+        EIGHT(6),
+        NINE(7),
+        TEN(8),
+        JACK(9),
+        QUEEN(10),
+        KING(11),
+        ACE(12);
+
+        public final int v;
+        private Value(int v){
+            this.v = v;
+        }
+    }
 
     public Suit suit;
-    public char value;
+    public Value value;
 
-    public Card(Suit suit, char value) {
+    public Card(Suit suit, Value value) {
         this.value = value;
         this.suit = suit;
     }
 
     @Override
     public int compareTo(Card o) {
-        String temp = new String(valueLookUp);
-        return temp.indexOf(o.value) - temp.indexOf(this.value);
+        return o.value.v - this.value.v;
     }
 }

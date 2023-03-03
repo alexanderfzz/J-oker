@@ -7,7 +7,7 @@ public class Deck {
     public Deck(){
         this.cards = new LinkedList<>();
         for (Card.Suit suit : Card.Suit.values()){
-            for (char value : Card.valueLookUp){
+            for (Card.Value value : Card.Value.values()){
                 this.cards.add(new Card(suit, value));
             }
         }
