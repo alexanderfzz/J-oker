@@ -56,14 +56,14 @@ public class HandClassifier {
         if (value == Card.Value.TWO){
             return Card.Value.TWO;
         }
-        return valueArray[(value.v-1)%12]; // Two will return an ace
+        return valueArray[(value.index-1)%12]; // Two will return an ace
     }
 
     public static Card.Value getNextValue(Card.Value value){
         if (value == Card.Value.ACE){
             return Card.Value.TWO;
         }
-        return valueArray[(value.v+1)%12];
+        return valueArray[(value.index+1)%12];
     }
 
     public static HandTypeHandPair strongestHand(LinkedList<Card> hand) {
@@ -96,7 +96,7 @@ public class HandClassifier {
 
     public static LinkedList<Card> getStraightFlush(LinkedList<Card> hand){
         for (Card.Suit suit : Card.Suit.values()){
-            for (Card.Value straightBegins : Arrays.copyOfRange(valueArrayReversed, 0, 13-straightLastBegins.v)){ // 13 instead of 12 to avoid off-by-one error
+            for (Card.Value straightBegins : Arrays.copyOfRange(valueArrayReversed, 0, 13-straightLastBegins.index)){ // 13 instead of 12 to avoid off-by-one error
                 Card.Value lookingForValue = straightBegins;
                 boolean nulled = false;
                 LinkedList<Card> straightFlush = new LinkedList<>();
@@ -171,7 +171,7 @@ public class HandClassifier {
 
     public static void sortHand(LinkedList<Card> hand){
         hand.sort((c1, c2) -> {
-                return c2.value.v - c1.value.v;
+                return c2.value.index - c1.value.index;
             }
         );
     }
