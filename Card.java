@@ -47,6 +47,11 @@ public class Card implements Comparable<Card> {
     }
 
     @Override
+    public String toString() {
+        return this.value.toString() + "_" + this.suit.toString();
+    }
+
+    @Override
     public int compareTo(Card o) {
         return o.value.v - this.value.v;
     }

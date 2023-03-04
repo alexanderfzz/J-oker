@@ -5,7 +5,7 @@ public class Player {
 
     public Player(String name, int capital) {
         this.name = name;
-        this. capital = capital;
+        this.capital = capital;
     }
 
     public void withdrawCaptial(int amount) {
@@ -14,9 +14,7 @@ public class Player {
     public void depositCapital(int amount) {
         this.capital += amount;
     }
-    public void leaveTable() {
-        //TODO: pop player from existing table
-    }
+
     public void showHand() {
         // if endgamecondition perform action
     }
