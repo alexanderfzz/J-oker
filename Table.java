@@ -4,24 +4,46 @@ import java.util.LinkedList;
 import java.util.Set;
 
 public class Table {
-    public int bigBlind, pot, currentBetOfTheRound;
-    public Card[] board = new Card[5];
-    public HashMap<Player, Integer> amountEachPlayerPutInPot = new HashMap<>();
-    public LinkedList<Player> players = new LinkedList<>();
+    public int bigBlind;
+    public boolean canStraddle;
+    public LinkedList<Card> board;
+    public LinkedList<Player> players;
     public int buttonIndex;
 
-    public void addPlayer(int index, Player target) {
+
+    /*
+    * bigBlind defines the mandatory investment by certain players
+    * canStraddle defines an optional feature
+    */
+    public Table(int bb, boolean canStraddle) {
+        this.bigBlind = bb;
+        this.canStraddle = canStraddle;
+        this.board = new LinkedList<>();
+        this.players = new LinkedList<>();
+    }
+
+    //add player to the table
+    public int addPlayer(int index, Player target) {
         if (players.contains(target)) {
-            return;
+            return -1;
         }
         players.add(index, target);
+        return 0;
     }
+
+    //remove player from the table
     public void removePlayer(Player target) {
         players.remove(target);
     }
-    public Player determineWinningHand() {
-        //TODO: figure this out
-        return null;
+
+    public void startGame() {
+        Game game = new Game();
+    }
+
+    public void incrementButtonPosition() {
+        //check if people left the table in between rounds
+        //else:
+        buttonIndex++;
     }
 
 }

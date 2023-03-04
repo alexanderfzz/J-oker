@@ -1,6 +1,3 @@
-import java.util.HashMap;
-import java.util.Map;
-
 public class Card implements Comparable<Card> {
     enum Color{
         RED,
@@ -32,9 +29,9 @@ public class Card implements Comparable<Card> {
         KING(11),
         ACE(12);
 
-        public final int v;
-        private Value(int v){
-            this.v = v;
+        public final int index;
+        private Value(int index){
+            this.index = index;
         }
     }
 
@@ -46,8 +43,12 @@ public class Card implements Comparable<Card> {
         this.suit = suit;
     }
 
+    /*
+    Comparable Interface method
+    When sorted, values goes from smallest to greatest
+    */
     @Override
     public int compareTo(Card o) {
-        return o.value.v - this.value.v;
+        return this.value.index - o.value.index;
     }
 }
