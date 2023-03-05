@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
+import java.util.*;
 
 
 public class HandClassifier {
@@ -134,16 +131,12 @@ public class HandClassifier {
     }
 
     public static LinkedList<Card> getThreeOfAKind(LinkedList<Card> hand){
-        for (Card.Value value : Card.Value.values()){
-            LinkedList<Card> threeOfAKind = new LinkedList<>();
-            for (Card.Suit suit : Card.Suit.values()){
-                Card card = getValueSuitInHand(value, suit, hand);
-                if (card != null){
-                    threeOfAKind.add(card);
-                }
-            }
-            if (threeOfAKind.size() == 3){
-                return threeOfAKind;
+        HashMap<Card.Value, CardFrequency> cardFrequencyTable = getCardFrequencyTable(hand);
+        LinkedList<CardFrequency> cardFrequencyList = new LinkedList<>(cardFrequencyTable.values());
+        cardFrequencyList.sort((o1, o2) -> {return o2.value.index - o1.value.index;});
+        for (CardFrequency cardFrequency : cardFrequencyList){
+            if (cardFrequency.count == 3){
+                return cardFrequency.cards;
             }
         }
         return null;
@@ -168,12 +161,22 @@ public class HandClassifier {
     }
 
 
-
     public static void sortHand(LinkedList<Card> hand){
         hand.sort((c1, c2) -> {
                 return c2.value.index - c1.value.index;
             }
         );
+    }
+
+    public static HashMap<Card.Value, CardFrequency> getCardFrequencyTable(LinkedList<Card> hand){
+        HashMap<Card.Value, CardFrequency> cardFrequencyTable = new HashMap<>();
+        for (Card card : hand){
+            if (!cardFrequencyTable.containsKey(card.value)){
+                cardFrequencyTable.put(card.value, new CardFrequency());
+            }
+            cardFrequencyTable.get(card.value).add(card);
+        }
+        return cardFrequencyTable;
     }
 }
 
@@ -183,5 +186,28 @@ class HandTypeHandPair{
     public HandTypeHandPair(HandClassifier.HandType handType, LinkedList<Card> hand){
         this.handType = handType;
         this.hand = hand;
+    }
+}
+
+class CardFrequency{
+    public LinkedList<Card> cards;
+    public int count;
+    public Card.Value value;
+
+    public CardFrequency(){
+        this.cards = new LinkedList<>();
+        this.count = 0;
+        this.value = null;
+    }
+
+    public void add(Card card){
+        this.cards.add(card);
+        this.count++;
+        this.value = card.value;
+    }
+
+    @Override
+    public String toString(){
+        return "[count=" + Integer.toString(this.count) + ", value=" +  this.value.toString() + ", cards=" + this.cards.toString();
     }
 }

@@ -1,20 +1,19 @@
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-//        Table currentT = new Table();
-//        Player player1 = new Player("John", 1000);
-//        players.players.add(player1);
-//        Player roller = players.roller();
-//        assert roller == player1;
-//
-//        Deck deck = new Deck();
-//        deck.shuffle();
-//        assert deck.cards.size() == 52;
-//
-//        Collections.sort(deck.cards);
-//        for (Card c : deck.cards) {
-//            System.out.println(c.suit+" "+c.value);
-//        }
+        LinkedList<Card> hand = new LinkedList<>();
+        hand.add(new Card(Card.Suit.HEART, Card.Value.ACE));
+        hand.add(new Card(Card.Suit.HEART, Card.Value.TWO));
+        hand.add(new Card(Card.Suit.HEART, Card.Value.ACE));
+        hand.add(new Card(Card.Suit.HEART, Card.Value.KING));
+        hand.add(new Card(Card.Suit.CLUB, Card.Value.KING));
+        hand.add(new Card(Card.Suit.CLUB, Card.Value.KING));
+        hand.add(new Card(Card.Suit.CLUB, Card.Value.JACK));
+        hand.add(new Card(Card.Suit.CLUB, Card.Value.JACK));
+        hand.add(new Card(Card.Suit.CLUB, Card.Value.JACK));
+        System.out.println(HandClassifier.getThreeOfAKind(hand));
     }
+
 }
